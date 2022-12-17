@@ -367,7 +367,7 @@ class GitAuthHelper {
     const pattern = regexpHelper.escape(configKey)
     await this.git.submoduleForeach(
       // wrap the pipeline in quotes to make sure it's handled properly by submoduleForeach, rather than just the first part of the pipeline
-      `sh -c "git config --local --name-only --get-regexp '${pattern}' && git config --local --unset-all '${configKey}' || :"`,
+      `sh -c "git config --local --name-only --get-regexp '${pattern}' && git config --local --unset-all '${configKey}' || echo > /dev/null"`,
       this.settings.nestedSubmodules
     )
   }
